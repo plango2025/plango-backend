@@ -7,11 +7,9 @@ import com.example.plango.auth.oauth.model.SocialUserAccount;
 import com.example.plango.auth.oauth.model.SocialUserAccountKey;
 import com.example.plango.auth.oauth.repository.SocialUserAccountRepository;
 import com.example.plango.auth.oauth.service.OAuthService;
-import com.example.plango.user.dto.UserProfileReadResponseDTO;
 import com.example.plango.user.model.UserInfo;
 import com.example.plango.user.repository.UserInfoRepository;
 import com.example.plango.user.service.UserInfoService;
-import com.example.plango.user.service.UserProfileService;
 import com.example.plango.util.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -27,11 +25,10 @@ public class OAuthServiceImpl implements OAuthService {
     private final SocialUserAccountRepository socialUserAccountRepository;
     private final UserInfoRepository userInfoRepository;
     private final KakaoAuthService kakaoAuthService;
-    private final UserProfileService userProfileService;
 
 
     @Override
-    public UserProfileReadResponseDTO loginWithKakao(String code){
+    public String loginWithKakao(String code){
         // 카카오 Access Token 발급
         String kakaoAccessToken= kakaoAuthService.getAccessToken(code);
 
@@ -64,8 +61,7 @@ public class OAuthServiceImpl implements OAuthService {
             userId=createSocialUser(SocialType.KAKAO.name(), kakaoUserId, kakaoNickname);
         }
 
-        // 사용자 프로필 정보 반환
-        return userProfileService.readProfileById(userId);
+        return userId;
     }
 
     private String createSocialUser(String socialType, String socialUserId, String socialNickname){
