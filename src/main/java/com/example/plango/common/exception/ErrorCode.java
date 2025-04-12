@@ -41,7 +41,10 @@ public enum ErrorCode {
     // DB 에러
     ENTITY_NOT_FOUND("DB001", "요청한 리소스를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     DATA_INTEGRITY_VIOLATION("DB002", "데이터 무결성 제약 조건에 위배되었습니다.", HttpStatus.CONFLICT),
-    DATA_ACCESS_ERROR("DB003", "데이터베이스 처리 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+    DATA_ACCESS_ERROR("DB003", "데이터베이스 처리 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+
+    // AI 에러
+    PYTHON_AI_ERROR("AI001", "AI 일정 생성 중 오류가 발생했습니다.", HttpStatus.BAD_GATEWAY);
 
 
     private final String code;
