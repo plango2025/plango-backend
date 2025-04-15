@@ -13,10 +13,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfig {
 
-    @Value("${applesquare.redis.host}")
+    @Value("${plango.redis.host}")
     private String host;
 
-    @Value("${applesquare.redis.port}")
+    @Value("${plango.redis.port}")
     private int port;
 
     @Bean

@@ -23,7 +23,7 @@ public class JwtManager {
 
     private final int ACCESS_TOKEN_EXPIRATION_SEC=60*30;  // 30분
     private final int REFRESH_TOKEN_EXPIRATION_SEC=60*60*24*7;  // 7일
-    @Value("${applesquare.jwt.secret}")
+    @Value("${plango.jwt.secret}")
     private String jwtSecret;
 
 
