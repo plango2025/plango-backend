@@ -45,5 +45,9 @@ public class ScheduleReadResponseDTO {
         @JsonProperty("image")
         @URL(message = "유효한 URL 형식이어야 합니다.")
         private String image;
+        @JsonProperty("latitude")
+        private Double latitude;  // 위도
+        @JsonProperty("longitude")
+        private Double longitude;  // 경도
     }
 }

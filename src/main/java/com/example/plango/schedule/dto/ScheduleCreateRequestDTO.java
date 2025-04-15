@@ -42,7 +42,5 @@ public class ScheduleCreateRequestDTO {
         private String name;
         @JsonProperty("address")
         private String address;
-        @JsonProperty("description")
-        private String description;
     }
 }
