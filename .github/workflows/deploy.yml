@@ -40,6 +40,11 @@ jobs:
               run: |
                   echo "Build Gradle..."
                   
+                  # 테스트용 설정 파일 생성
+                  mkdir -p src/test/resources
+                  echo "$TEST_APPLICATION_PROPERTIES" > src/test/resources/application.properties
+                  chmod 600 src/test/resources/application.properties
+                  
                   # gradlew 실행 권한 부여
                   chmod +x ./gradlew
                   
