@@ -9,16 +9,29 @@ import org.hibernate.validator.constraints.URL;
 
 import java.util.List;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduleReadResponseDTO {
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("days")
-    private List<DaySchedule> days;
+
+    @JsonProperty("schedule_id")
+    private String scheduleId;
+
+    @JsonProperty("schedule")
+    private Schedule schedule;
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Schedule {
+        @JsonProperty("title")
+        private String title;
+
+        @JsonProperty("days")
+        private List<DaySchedule> days;
+    }
 
     @Getter
     @Setter
@@ -26,28 +39,34 @@ public class ScheduleReadResponseDTO {
     @AllArgsConstructor
     public static class DaySchedule {
         @JsonProperty("day")
-        private int day;
-        @JsonProperty("schedules")
-        private List<ScheduleDetail> schedules;
+        private Integer day;
+
+        @JsonProperty("places")
+        private List<PlaceItem> places;
     }
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class ScheduleDetail {
+    public static class PlaceItem {
         @JsonProperty("order")
-        private int order;
+        private Integer order;
+
         @JsonProperty("name")
         private String name;
+
         @JsonProperty("description")
         private String description;
+
         @JsonProperty("image")
         @URL(message = "유효한 URL 형식이어야 합니다.")
         private String image;
+
         @JsonProperty("latitude")
-        private Double latitude;  // 위도
+        private Double latitude;
+
         @JsonProperty("longitude")
-        private Double longitude;  // 경도
+        private Double longitude;
     }
 }

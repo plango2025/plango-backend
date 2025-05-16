@@ -22,7 +22,6 @@ public class UrlManager {
             return switch (source) {
                 case FRONT    -> frontDomain + urlPath.getPath();   // 프론트 엔드 URL
                 case BACK     -> backDomain + urlPath.getPath();    // 백엔드 서버 URL
-                case PYTHON   -> pythonDomain + urlPath.getPath();    // 파이썬 서버 URL
                 case EXTERNAL -> urlPath.getPath();                 // 외부 URL
             };
         }
