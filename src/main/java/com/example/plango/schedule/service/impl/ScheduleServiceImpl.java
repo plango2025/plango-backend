@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -33,7 +34,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     private String getUserId() {
         try {
             UserInfo userInfo = securityService.getUserInfo();
-            return userInfo.getId();
+            if(userInfo!=null) return userInfo.getId();
+            else return null;
         } catch (TokenException e) {
             return null;
         }
@@ -79,10 +81,9 @@ public class ScheduleServiceImpl implements ScheduleService {
         headers.set("X-PLANGO-AI-ACCESS-KEY", plangoAIAccessKey);
 
         // 요청 바디 구성
-        Map<String, Object> body = Map.of(
-                "places", dto.getPlaces(),
-                "user_id", getUserId()
-        );
+        Map<String, Object> body = new HashMap<>();
+        body.put("places", dto.getPlaces());
+        body.put("user_id", getUserId());
 
         try {
             // PATCH 요청 전송
@@ -112,10 +113,9 @@ public class ScheduleServiceImpl implements ScheduleService {
         headers.set("X-PLANGO-AI-ACCESS-KEY", plangoAIAccessKey);
 
         // 요청 바디 구성
-        Map<String, Object> body = Map.of(
-                "places", dto.getPlaces(),
-                "user_id", getUserId()
-        );
+        Map<String, Object> body = new HashMap<>();
+        body.put("places", dto.getPlaces());
+        body.put("user_id", getUserId());
 
         try {
             // PATCH 요청 전송
@@ -145,7 +145,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         headers.set("X-PLANGO-AI-ACCESS-KEY", plangoAIAccessKey);
 
         // 요청 바디 구성
-        Map<String, String> body = Map.of("user_id", getUserId());
+        Map<String, Object> body = new HashMap<>();
+        body.put("user_id", getUserId());
 
         try {
             // PATCH 요청 전송
@@ -175,10 +176,9 @@ public class ScheduleServiceImpl implements ScheduleService {
         headers.set("X-PLANGO-AI-ACCESS-KEY", plangoAIAccessKey);
 
         // 요청 바디 구성
-        Map<String, Object> body = Map.of(
-                "feedback", dto.getFeedback(),
-                "user_id", getUserId()
-        );
+        Map<String, Object> body = new HashMap<>();
+        body.put("feedback", dto.getFeedback());
+        body.put("user_id", getUserId());
 
         try {
             // PATCH 요청 전송 및 응답 수신
@@ -208,7 +208,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         headers.set("X-PLANGO-AI-ACCESS-KEY", plangoAIAccessKey);
 
         // 요청 바디 구성
-        Map<String, String> body = Map.of("user_id", getUserId());
+        Map<String, Object> body = new HashMap<>();
+        body.put("user_id", getUserId());
 
         try {
             // PATCH 요청 전송 및 응답 수신
