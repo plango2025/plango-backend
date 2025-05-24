@@ -31,15 +31,17 @@ services:
         ports:
             - "8080:8080"
         environment:
-            SPRING_CONFIG_LOCATION: file:/app/config/application.properties
+            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/plango
+            SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+            SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+            SPRING_REDIS_HOST: redis
+            SPRING_REDIS_PORT: 6379
         depends_on:
             - mysql
             - redis
-        volumes:    # 로컬 디렉터리를 컨테이너 내부에 마운트
-            # 파일 저장소
-            - /home/ubuntu/storage:/home/ubuntu/storage
-            # application.properties 파일을 외부에서 주입
-            - /home/ubuntu/plango/application.properties:/app/config/application.properties
+        volumes:
+            # 로컬 디렉터리를 컨테이너 내부에 마운트
+            - /home/ubuntu/storage:/home/ubuntu/storage    # 파일 저장소
         networks:
             - app-network
 
