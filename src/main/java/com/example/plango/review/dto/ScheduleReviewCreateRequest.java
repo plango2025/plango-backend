@@ -2,6 +2,7 @@ package com.example.plango.review.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.plango.review.model.ScheduleReview;
+import com.example.plango.user.model.UserInfo;
 import jakarta.validation.constraints.*;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class ScheduleReviewCreateRequest {
 
     @NotNull(message = "일정 ID는 필수입니다.")
     @JsonProperty("schedule_id")
-    private Long scheduleId;
+    private String scheduleId;
 
     @NotBlank(message = "리뷰 제목을 입력해주세요.")
     @Size(max = 100, message = "제목은 최대 100자까지 입력할 수 있습니다.")
@@ -39,10 +40,10 @@ public class ScheduleReviewCreateRequest {
     @JsonProperty("images")
     private List<@NotBlank(message = "이미지 URL은 비어 있을 수 없습니다.") String> images;
 
-    public ScheduleReview toEntity(Long userId) {
+    public ScheduleReview toEntity(UserInfo user) {
         return ScheduleReview.builder()
                 .scheduleId(this.scheduleId)
-                .userId(userId)
+                .user(user)
                 .title(this.title)
                 .content(this.content)
                 .rating(this.rating)

@@ -29,6 +29,7 @@ public enum TargetType {
             }
         }
 
+        // 추후 plango 프로젝트에서 공통적으로 사용하고 있는 예외 처리 방식으로 교체 예정
         throw new IllegalArgumentException("Invalid TargetType: " + value);
 
     }

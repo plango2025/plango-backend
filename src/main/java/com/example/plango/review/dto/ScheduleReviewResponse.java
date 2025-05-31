@@ -20,10 +20,10 @@ public class ScheduleReviewResponse {
     private Long id;
 
     @JsonProperty("schedule_id")
-    private Long scheduleId;
+    private String scheduleId;
 
     @JsonProperty("user_id")
-    private Long userId;
+    private String userId;
 
     @JsonProperty("title")
     private String title;
@@ -47,13 +47,13 @@ public class ScheduleReviewResponse {
         return ScheduleReviewResponse.builder()
                 .id(review.getId())
                 .scheduleId(review.getScheduleId())
-                .userId(review.getUserId())
+                .userId(review.getUser().getId())
                 .title(review.getTitle())
                 .content(review.getContent())
                 .rating(review.getRating())
                 .images(review.getImages())
-                .createdAt(review.getCreatedAt())
-                .updatedAt(review.getUpdatedAt())
+                .createdAt(review.getRegDate())
+                .updatedAt(review.getModDate())
                 .build();
     }
 }

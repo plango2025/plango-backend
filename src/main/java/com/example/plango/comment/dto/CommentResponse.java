@@ -26,7 +26,7 @@ public class CommentResponse {
     private TargetType targetType; // SCHEDULE_REVIEW or PLACE_REVIEW
 
     @JsonProperty("user_id")
-    private Long userId;
+    private String userId;
 
     @JsonProperty("content")
     private String content;
@@ -42,10 +42,10 @@ public class CommentResponse {
                 .id(comment.getId())
                 .targetId(comment.getTargetId())
                 .targetType(comment.getTargetType())
-                .userId(comment.getUserId())
+                .userId(comment.getUser().getId())
                 .content(comment.getContent())
-                .createdAt(comment.getCreatedAt())
-                .updatedAt(comment.getUpdatedAt())
+                .createdAt(comment.getRegDate())
+                .updatedAt(comment.getModDate())
                 .build();
     }
 }

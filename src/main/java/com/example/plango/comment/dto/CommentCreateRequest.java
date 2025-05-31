@@ -5,6 +5,7 @@ import com.example.plango.comment.model.Comment;
 import com.example.plango.common.enums.TargetType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import com.example.plango.user.model.UserInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,11 +30,11 @@ public class CommentCreateRequest {
     @JsonProperty("content")
     private String content;
 
-    public Comment toEntity(Long userId) {
+    public Comment toEntity(UserInfo user) {
         return Comment.builder()
                 .targetId(this.targetId)
                 .targetType(this.targetType)
-                .userId(userId)
+                .user(user)
                 .content(this.content)
                 .build();
     }
