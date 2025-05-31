@@ -27,7 +27,7 @@ public class ReviewResponse {
     private TargetType targetType;
 
     @JsonProperty("user_id")
-    private Long userId;
+    private String userId;
 
     @JsonProperty("title")
     private String title;
@@ -57,8 +57,8 @@ public class ReviewResponse {
                 .content(review.getContent())
                 .rating(review.getRating())
                 .images(review.getImages())
-                .createdAt(review.getCreatedAt())
-                .updatedAt(review.getUpdatedAt())
+                .createdAt(review.getRegDate())
+                .updatedAt(review.getModDate())
                 .build();
     }
 }

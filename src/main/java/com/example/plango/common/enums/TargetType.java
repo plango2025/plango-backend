@@ -6,6 +6,8 @@ import com.example.plango.common.exception.ErrorCode;
 
 public enum TargetType {
 
+    SCHEDULE("SCHEDULE"),
+    PLACE("PLACE"),
     SCHEDULE_REVIEW("SCHEDULE_REVIEW"),
     PLACE_REVIEW("PLACE_REVIEW"),
     COMMENT("COMMENT");

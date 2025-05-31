@@ -1,7 +1,4 @@
-package com.example.plango.common.enums;
-
-import com.example.plango.common.exception.ErrorCode;
-import com.example.plango.common.exception.ExceptionBase;
+package com.example.plango.common.exception;
 
 public class InvalidTargetTypeException extends ExceptionBase {
     public InvalidTargetTypeException(String message) {

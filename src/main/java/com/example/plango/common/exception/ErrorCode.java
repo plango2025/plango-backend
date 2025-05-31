@@ -44,7 +44,27 @@ public enum ErrorCode {
     DATA_ACCESS_ERROR("DB003", "데이터베이스 처리 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
 
     // AI 에러
-    PYTHON_AI_ERROR("AI001", "AI 일정 생성 중 오류가 발생했습니다.", HttpStatus.BAD_GATEWAY);
+    PYTHON_AI_ERROR("AI001", "AI 일정 생성 중 오류가 발생했습니다.", HttpStatus.BAD_GATEWAY),
+
+    // 댓글 에러
+    COMMENT_CREATION_FAILED("COM001", "댓글 생성에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    COMMENT_READ_FAILED("COM002", "댓글 조회에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    COMMENT_NOT_FOUND("COM003", "댓글을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+    COMMENT_FORBIDDEN("COM004", "댓글에 대한 권한이 없습니다.", HttpStatus.FORBIDDEN),
+
+    // 좋아요 관련 에러
+    ALREADY_LIKED("LIKE001", "이미 좋아요를 누른 대상입니다.", HttpStatus.CONFLICT),
+    LIKE_CREATION_FAILED("LIKE002", "좋아요 생성에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_TARGET_TYPE("LIKE003", "유효하지 않은 대상 타입입니다.", HttpStatus.BAD_REQUEST),
+
+    // 리뷰 관련 에러
+    REVIEW_CREATION_FAILED("REV001", "리뷰 생성에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    REVIEW_READ_FAILED("REV002", "리뷰 조회에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+    REVIEW_NOT_FOUND("REV003", "리뷰를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+    REVIEW_FORBIDDEN("REV004", "리뷰에 대한 권한이 없습니다.", HttpStatus.FORBIDDEN),
+
+    // 장소 소개 관련 에러
+    TOUR_STREAMING_FAILED("PLACE001", "장소 정보를 불러오는 중 오류가 발생했습니다.", HttpStatus.BAD_GATEWAY);
 
 
     private final String code;

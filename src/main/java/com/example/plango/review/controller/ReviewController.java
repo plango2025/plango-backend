@@ -1,9 +1,10 @@
 package com.example.plango.review.controller;
 
 import com.example.plango.common.security.SecurityService;
-import com.example.plango.review.dto.ScheduleReviewCreateRequest;
-import com.example.plango.review.dto.ScheduleReviewResponse;
-import com.example.plango.review.service.ScheduleReviewService;
+import com.example.plango.review.dto.ReviewCreateRequest;
+import com.example.plango.review.dto.ReviewResponse;
+import com.example.plango.review.dto.ReviewUpdateRequest;
+import com.example.plango.review.service.ReviewService;
 import com.example.plango.user.model.UserInfo;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,48 +16,58 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/reviews")
-public class ScheduleReviewController {
+public class ReviewController {
 
-    private final ScheduleReviewService scheduleReviewService;
+    private final ReviewService reviewService;
     private final SecurityService securityService;
 
     /**
-     * 리뷰 작성
+     * ✍ 리뷰 작성
      */
     @PostMapping
-    public ResponseEntity<ScheduleReviewResponse> createReview(
-            @RequestBody @Valid ScheduleReviewCreateRequest request
-    ) {
+    public ResponseEntity<ReviewResponse> createReview(@RequestBody @Valid ReviewCreateRequest request) {
         UserInfo user = securityService.getUserInfo();
-        ScheduleReviewResponse response = scheduleReviewService.createReview(request, user);
+        ReviewResponse response = reviewService.createReview(request, user);
         return ResponseEntity.ok(response);
     }
 
     /**
-     * 전체 리뷰 목록 조회
+     * 특정 유형(SCHEDULE/PLACE)에 대한 전체 리뷰 목록 조회
+     * @param targetType 필수 요청 파라미터
      */
     @GetMapping
-    public ResponseEntity<List<ScheduleReviewResponse>> getAllReviews() {
-        List<ScheduleReviewResponse> responseList = scheduleReviewService.getAllReviews();
+    public ResponseEntity<List<ReviewResponse>> getReviewsByTargetType(@RequestParam String targetType) {
+        List<ReviewResponse> responseList = reviewService.getReviewsByTargetType(targetType);
         return ResponseEntity.ok(responseList);
     }
 
     /**
-     * 특정 리뷰 단건 조회
+     * 리뷰 단건 조회
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleReviewResponse> getReviewById(@PathVariable Long id) {
-        ScheduleReviewResponse response = scheduleReviewService.getReviewById(id);
+    public ResponseEntity<ReviewResponse> getReviewById(@PathVariable Long id) {
+        ReviewResponse response = reviewService.getReviewById(id);
         return ResponseEntity.ok(response);
     }
 
+//    /**
+//     * 리뷰 수정
+//     */
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ReviewResponse> updateReview(@PathVariable Long id,
+//                                                       @RequestBody @Valid ReviewUpdateRequest request) {
+//        UserInfo user = securityService.getUserInfo();
+//        ReviewResponse response = reviewService.updateReview(id, request, user);
+//        return ResponseEntity.ok(response);
+//    }
+
+    /**
+     * 리뷰 삭제
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReview(@PathVariable Long id) {
         UserInfo user = securityService.getUserInfo();
-        scheduleReviewService.deleteReview(id, user);
+        reviewService.deleteReview(id, user);
         return ResponseEntity.noContent().build(); // 204 No Content
     }
-
-
-
 }

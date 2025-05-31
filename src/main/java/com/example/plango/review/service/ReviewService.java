@@ -31,14 +31,14 @@ public interface ReviewService {
      */
     ReviewResponse getReviewById(Long reviewId);
 
-    /**
-     * 리뷰 수정
-     * @param reviewId 리뷰 ID
-     * @param request 수정할 내용
-     * @param user 작성자 정보 (권한 확인용)
-     * @return 수정된 리뷰 정보
-     */
-    ReviewResponse updateReview(Long reviewId, ReviewUpdateRequest request, UserInfo user);
+//    /**
+//     * 리뷰 수정
+//     * @param reviewId 리뷰 ID
+//     * @param request 수정할 내용
+//     * @param user 작성자 정보 (권한 확인용)
+//     * @return 수정된 리뷰 정보
+//     */
+//    ReviewResponse updateReview(Long reviewId, ReviewUpdateRequest request, UserInfo user);
 
     /**
      * 리뷰 삭제

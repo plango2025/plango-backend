@@ -16,9 +16,6 @@ public interface CommentService {
     // 댓글 전체 조회 (특정 리뷰에 대한)
     List<CommentResponse> getCommentsByTarget(Long targetId, TargetType targetType);
 
-    // 댓글 수정
-    CommentResponse updateComment(Long commentId, CommentUpdateRequest request, UserInfo user);
-
     // 댓글 삭제
     void deleteComment(Long commentId, UserInfo user);
 }
