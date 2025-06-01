@@ -20,3 +20,6 @@ application-*.yml
 # Environment
 .env
 .env.*
+
+### Key ###
+*.pem

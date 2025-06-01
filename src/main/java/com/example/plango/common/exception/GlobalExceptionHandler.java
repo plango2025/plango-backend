@@ -120,4 +120,10 @@ public class GlobalExceptionHandler {
         ErrorCode errorCode=ErrorCode.INTERNAL_SERVER_ERROR;
         return ResponseEntity.status(errorCode.getStatus()).body(ErrorResponse.of(errorCode));
     }
+
+    // TargetType 타입 에러
+    @ExceptionHandler(InvalidTargetTypeException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidType(InvalidTargetTypeException e) {
+        return ResponseEntity.status(e.getStatus()).body(ErrorResponse.of(e));
+    }
 }
