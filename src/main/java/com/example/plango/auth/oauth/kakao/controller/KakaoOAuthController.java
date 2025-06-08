@@ -71,7 +71,6 @@ public class KakaoOAuthController {
         try{
             // 카카오 로그인
             String userId=oAuthService.loginWithKakao(code);
-
             // HTTP Header 설정
             HttpHeaders headers=new HttpHeaders();
 

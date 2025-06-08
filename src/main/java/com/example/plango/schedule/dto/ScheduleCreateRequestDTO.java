@@ -19,7 +19,7 @@ public class ScheduleCreateRequestDTO {
     @JsonProperty("destination")
     private String destination;
     @JsonProperty("duration")
-    private String duration;
+    private Integer duration;
     @JsonProperty("companion")
     private String companion;
     @JsonProperty("style")

@@ -43,7 +43,6 @@ public class OAuthServiceImpl implements OAuthService {
         if(kakaoUserId == null || kakaoNickname == null){
             throw new OAuth2AuthenticationException("Kakao 사용자 정보를 조회할 수 없습니다.");
         }
-
         // 이미 회원가입한 유저인지 조회
         SocialUserAccountKey socialUserAccountKey= SocialUserAccountKey.builder()
                 .socialType(SocialType.KAKAO.name())
