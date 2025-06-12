@@ -23,7 +23,8 @@ public class FileController {
     private final FileService fileService;
     private SecurityService securityService;
 
-    @PostMapping(value = "/upload", consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<SuccessResponse> uploadFiles(List<MultipartFile> files) throws Exception {
         // 사용자 정보 가져오기
         UserInfo uploader=securityService.getUserInfo();
