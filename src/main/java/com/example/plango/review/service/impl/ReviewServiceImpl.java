@@ -3,7 +3,6 @@ package com.example.plango.review.service.impl;
 import com.example.plango.common.enums.TargetType;
 import com.example.plango.review.dto.ReviewCreateRequest;
 import com.example.plango.review.dto.ReviewResponse;
-import com.example.plango.review.dto.ReviewUpdateRequest;
 import com.example.plango.review.exception.*;
 import com.example.plango.review.model.Review;
 import com.example.plango.review.repository.ReviewRepository;
@@ -20,8 +19,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
-
     private final ReviewRepository reviewRepository;
+
 
     @Override
     @Transactional
@@ -45,7 +44,7 @@ public class ReviewServiceImpl implements ReviewService {
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             throw new InvalidTargetTypeException("유효하지 않은 타겟 타입입니다.");
-        } catch (Exception e) {
+        } catch (Exception e){
             throw new ReviewReadException("리뷰 목록 조회 중 오류가 발생했습니다.");
         }
     }
