@@ -13,7 +13,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     // 특정 대상 유형(SCHEDULE or PLACE)에 해당하는 모든 리뷰 조회
     List<Review> findByTargetTypeOrderByIdDesc(TargetType targetType);
 
+    List<Review> findByTargetTypeAndUser_IdOrderByIdDesc(TargetType targetType, String userId);
+
     // 특정 단일 리뷰 조회 (기본 제공되는 findById 사용)
 
-    long countByUser_Id(String userId);
+    long countByTargetTypeAndUser_Id(TargetType targetType, String userId);
 }

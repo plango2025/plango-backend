@@ -16,9 +16,11 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import com.example.plango.common.enums.TargetType;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
 
 @Log4j2
 @Service
@@ -47,7 +49,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         StorageFile profileImage=userInfo.getProfileImage();
         String profileImageUrl=fileService.convertFilenameToUrl(profileImage.getFilename());
 
-        long reviewCount = reviewRepository.countByUser_Id(userId);
+        long reviewCount = reviewRepository.countByTargetTypeAndUser_Id(TargetType.SCHEDULE_REVIEW, userId);
         return UserInfoReadResponseDTO.builder()
                 .id(userInfo.getId())
                 .nickname(userInfo.getNickname())

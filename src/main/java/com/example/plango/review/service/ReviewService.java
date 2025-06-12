@@ -24,6 +24,13 @@ public interface ReviewService {
     List<ReviewResponse> getReviewsByTargetType(String targetType); // ENUM 직접 받을 수도 있음
 
     /**
+     * 특정 사용자가 작성한 리뷰 목록 조회
+     * @param userId 사용자 ID
+     * @return 해당 사용자가 작성한 리뷰 목록
+     */
+    List<ReviewResponse> getReviewsByUserId(String userId);
+
+    /**
      * 리뷰 단건 조회
      * @param reviewId 리뷰 ID
      * @return 해당 리뷰 정보

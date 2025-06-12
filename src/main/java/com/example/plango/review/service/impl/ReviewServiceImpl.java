@@ -51,6 +51,18 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<ReviewResponse> getReviewsByUserId(String userId) {
+        // 사용자 ID로 리뷰 목록 조회
+        List<Review> reviews = reviewRepository.findByTargetTypeAndUser_IdOrderByIdDesc(TargetType.SCHEDULE_REVIEW, userId);
+
+        // Entity -> DTO 변환
+        return reviews.stream()
+                .map(ReviewResponse::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public ReviewResponse getReviewById(Long id) {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new ReviewNotFoundException("해당 리뷰를 찾을 수 없습니다."));
