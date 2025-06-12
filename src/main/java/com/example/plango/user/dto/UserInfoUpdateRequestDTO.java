@@ -5,12 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Getter
-@Builder(toBuilder = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserProfileReadResponseDTO {
-    private String id;
+public class UserInfoUpdateRequestDTO {
     private String nickname;
-    private String profileImage;
+    private String address;
+    private LocalDate birth;
+    private String about;
 }

@@ -15,7 +15,6 @@ import com.example.plango.user.model.UserInfo;
 @AllArgsConstructor
 @Builder
 public class LikeRequest {
-
     @NotNull(message = "좋아요 대상 ID는 필수입니다.")
     @JsonProperty("target_id")
     private Long targetId;

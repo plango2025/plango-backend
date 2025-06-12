@@ -39,7 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
     public List<ReviewResponse> getReviewsByTargetType(String targetTypeStr) {
         try {
             TargetType targetType = TargetType.fromValue(targetTypeStr);
-            return reviewRepository.findByTargetTypeOrderByCreatedAtDesc(targetType)
+            return reviewRepository.findByTargetTypeOrderByIdDesc(targetType)
                     .stream()
                     .map(ReviewResponse::fromEntity)
                     .collect(Collectors.toList());

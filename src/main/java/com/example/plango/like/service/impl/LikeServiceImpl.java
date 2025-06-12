@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class LikeServiceImpl implements LikeService {
 
     private final LikeRepository likeRepository;
@@ -37,6 +37,16 @@ public class LikeServiceImpl implements LikeService {
         } catch (Exception e) {
             throw new LikeCreationException("좋아요 저장 중 오류가 발생했습니다.");
         }
+    }
+
+    @Override
+    public void unlike(LikeRequest request, UserInfo user) {
+        // 좋아요 조회
+        Like like = likeRepository.findByUserAndTargetIdAndTargetType(user, request.getTargetId(), request.getTargetType())
+                .orElseThrow(() -> new AlreadyLikedException("좋아요가 존재하지 않습니다."));
+
+        // 좋아요 취소
+        likeRepository.delete(like);
     }
 
     @Override

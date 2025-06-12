@@ -2,7 +2,6 @@ package com.example.plango.review.service;
 
 import com.example.plango.review.dto.ReviewCreateRequest;
 import com.example.plango.review.dto.ReviewResponse;
-import com.example.plango.review.dto.ReviewUpdateRequest;
 import com.example.plango.user.model.UserInfo;
 
 import java.util.List;

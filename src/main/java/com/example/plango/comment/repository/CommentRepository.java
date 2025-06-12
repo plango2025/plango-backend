@@ -12,6 +12,6 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     // 특정 리뷰(targetId + targetType)에 대한 모든 댓글 조회
-    List<Comment> findByTargetIdAndTargetTypeOrderByCreatedAtAsc(Long targetId, TargetType targetType);
+    List<Comment> findByTargetIdAndTargetTypeOrderByIdAsc(Long targetId, TargetType targetType);
 
 }

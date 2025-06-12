@@ -2,7 +2,6 @@ package com.example.plango.comment.controller;
 
 import com.example.plango.comment.dto.CommentCreateRequest;
 import com.example.plango.comment.dto.CommentResponse;
-import com.example.plango.comment.dto.CommentUpdateRequest;
 import com.example.plango.comment.service.CommentService;
 import com.example.plango.common.dto.SuccessResponse;
 import com.example.plango.common.enums.TargetType;
@@ -10,7 +9,6 @@ import com.example.plango.common.security.SecurityService;
 import com.example.plango.user.model.UserInfo;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

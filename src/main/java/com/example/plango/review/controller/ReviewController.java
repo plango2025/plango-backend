@@ -4,7 +4,6 @@ import com.example.plango.common.dto.SuccessResponse;
 import com.example.plango.common.security.SecurityService;
 import com.example.plango.review.dto.ReviewCreateRequest;
 import com.example.plango.review.dto.ReviewResponse;
-import com.example.plango.review.dto.ReviewUpdateRequest;
 import com.example.plango.review.service.ReviewService;
 import com.example.plango.user.model.UserInfo;
 import jakarta.validation.Valid;

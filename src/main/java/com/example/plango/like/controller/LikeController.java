@@ -34,6 +34,13 @@ public class LikeController {
         return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(response));
     }
 
+    @DeleteMapping("")
+    public ResponseEntity<SuccessResponse> unlike(@RequestBody @Valid LikeRequest request) {
+        UserInfo user = securityService.getUserInfo();
+        likeService.unlike(request, user);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    
     /**
      * 좋아요 수 조회 API
      *

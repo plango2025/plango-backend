@@ -2,7 +2,6 @@ package com.example.plango.comment.service.impl;
 
 import com.example.plango.comment.dto.CommentCreateRequest;
 import com.example.plango.comment.dto.CommentResponse;
-import com.example.plango.comment.dto.CommentUpdateRequest;
 import com.example.plango.comment.exception.CommentCreationException;
 import com.example.plango.comment.exception.CommentNotFoundException;
 import com.example.plango.comment.exception.CommentPermissionDeniedException;
@@ -41,7 +40,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentResponse> getCommentsByTarget(Long targetId, TargetType targetType) {
         try {
-            return commentRepository.findByTargetIdAndTargetTypeOrderByCreatedAtAsc(targetId, targetType)
+            return commentRepository.findByTargetIdAndTargetTypeOrderByIdAsc(targetId, targetType)
                     .stream()
                     .map(CommentResponse::fromEntity)
                     .collect(Collectors.toList());

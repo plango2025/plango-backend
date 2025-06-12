@@ -7,14 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/users")
+@RequestMapping("/api/users/profile")
 public class UserProfileController {
     private final UserProfileService userProfileService;
 
@@ -26,9 +25,18 @@ public class UserProfileController {
      *                  나의 프로필
      */
     @GetMapping("/me")
-    public ResponseEntity<Map<String, Object>> readMyProfile(){
+    public ResponseEntity<SuccessResponse> readMyProfile(){
         // 나의 프로필 조회
         UserProfileReadResponseDTO userProfileDTO=userProfileService.readMyProfile();
+
+        // 응답 생성
+        return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(userProfileDTO));
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<SuccessResponse> readUserProfile(@PathVariable String userId){
+        // 프로필 조회
+        UserProfileReadResponseDTO userProfileDTO=userProfileService.readProfileById(userId);
 
         // 응답 생성
         return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(userProfileDTO));
