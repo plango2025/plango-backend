@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,6 +18,29 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
 
+    @PostMapping(value="/dummy-create")
+    public ResponseEntity<SuccessResponse> createDummySchedule(){
+        // 테스트 요청 생성
+        ScheduleCreateRequestDTO scheduleCreateRequestDTO=ScheduleCreateRequestDTO.builder()
+                .requiredPlaces(List.of())
+                .destination("춘천")
+                .duration(2)
+                .companion("연인과")
+                .style("힐링 여행")
+                .scheduleCount(4)
+                .budget(15)
+                .extra("꽃 보고 싶어")
+                .build();
+
+        // AI 일정 생성
+        ScheduleReadResponseDTO scheduleDTO= scheduleService.createSchedule(scheduleCreateRequestDTO);
+
+        // 생성된 일정 보관
+        scheduleService.keep(scheduleDTO.getScheduleId());
+
+        // 응답 반환
+        return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.of(scheduleDTO));
+    }
     /**
      * AI 일정 생성 API
      * @param scheduleCreateRequestDTO 일정 생성 파라미터
@@ -29,7 +53,7 @@ public class ScheduleController {
         ScheduleReadResponseDTO scheduleDTO= scheduleService.createSchedule(scheduleCreateRequestDTO);
 
         // 응답 반환
-        return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(scheduleDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.of(scheduleDTO));
     }
 
     /**

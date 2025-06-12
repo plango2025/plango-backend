@@ -2,15 +2,13 @@ package com.example.plango.schedule.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduleCreateRequestDTO {
@@ -19,7 +17,7 @@ public class ScheduleCreateRequestDTO {
     @JsonProperty("destination")
     private String destination;
     @JsonProperty("duration")
-    private String duration;
+    private Integer duration;
     @JsonProperty("companion")
     private String companion;
     @JsonProperty("style")
