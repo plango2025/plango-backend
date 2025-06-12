@@ -1,6 +1,8 @@
 package com.example.plango.user.service.impl;
 
 import com.example.plango.common.security.SecurityService;
+import com.example.plango.file.model.StorageFile;
+import com.example.plango.file.service.FileService;
 import com.example.plango.user.dto.UserProfileReadResponseDTO;
 import com.example.plango.user.model.UserInfo;
 import com.example.plango.user.repository.UserInfoRepository;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserProfileServiceImpl implements UserProfileService {
     private final UserInfoRepository userInfoRepository;
     private final SecurityService securityService;
+    private final FileService fileService;
 
 
     /**
@@ -33,9 +36,13 @@ public class UserProfileServiceImpl implements UserProfileService {
         UserInfo userInfo=userInfoRepository.findById(userId)
                 .orElseThrow(()-> new EntityNotFoundException("존재하지 않는 사용자입니다. (id = "+userId+")"));
 
+        StorageFile profileImage=userInfo.getProfileImage();
+        String profileImageUrl=(profileImage!=null)?fileService.convertFilenameToUrl(profileImage.getFilename()):null;
+
         return UserProfileReadResponseDTO.builder()
                 .id(userInfo.getId())
                 .nickname(userInfo.getNickname())
+                .profileImage(profileImageUrl)
                 .build();
     }
 
@@ -48,9 +55,12 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public UserProfileReadResponseDTO readMyProfile(){
         UserInfo myUserInfo= securityService.getUserInfo();
+        StorageFile profileImage=myUserInfo.getProfileImage();
+        String profileImageUrl=(profileImage!=null)?fileService.convertFilenameToUrl(profileImage.getFilename()):null;
         return UserProfileReadResponseDTO.builder()
                 .id(myUserInfo.getId())
                 .nickname(myUserInfo.getNickname())
+                .profileImage(profileImageUrl)
                 .build();
     }
 }
