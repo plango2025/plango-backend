@@ -21,23 +21,21 @@ import java.util.List;
 @RequestMapping("/api/files")
 public class FileController {
     private final FileService fileService;
-    private SecurityService securityService;
+    private final SecurityService securityService;
 
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<SuccessResponse> uploadFiles(List<MultipartFile> files) throws Exception {
+    public ResponseEntity<String> uploadFiles(@RequestParam("file") MultipartFile file) throws Exception {
         // 사용자 정보 가져오기
         UserInfo uploader=securityService.getUserInfo();
 
         // 파일 업로드 및 URL 생성
-        List<String> urls=new LinkedList<>();
-        for(MultipartFile file: files){
-            String url=fileService.uploadFileAndGetUrl(file, uploader);
-            urls.add(url);
-        }
+        String url=fileService.uploadFileAndGetUrl(file, uploader);
+
+        System.out.println("사진 URL : "+url);
 
         // 응답 반환
-        return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.of(urls));
+        return ResponseEntity.status(HttpStatus.CREATED).body(url);
     }
 
     /**
