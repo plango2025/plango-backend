@@ -1,6 +1,7 @@
 package com.example.plango.schedule.controller;
 
 import com.example.plango.common.dto.SuccessResponse;
+import com.example.plango.common.security.SecurityService;
 import com.example.plango.schedule.dto.*;
 import com.example.plango.schedule.service.ScheduleService;
 import jakarta.validation.Valid;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/schedules")
 public class ScheduleController {
     private final ScheduleService scheduleService;
+    private final SecurityService securityService;
 
 
     @PostMapping(value="/dummy-create")
@@ -116,5 +118,12 @@ public class ScheduleController {
 
         // 응답 반환
         return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(scheduleDTO));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<SuccessResponse> readSchedules(){
+        String userId=securityService.getUserInfo().getId();
+        ScheduleThumbnailListDTO schedules=scheduleService.readByUserId(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(schedules));
     }
 }

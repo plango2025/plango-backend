@@ -1,8 +1,6 @@
 package com.example.plango.user.controller;
 
 import com.example.plango.common.dto.SuccessResponse;
-import com.example.plango.schedule.dto.ScheduleThumbnailListDTO;
-import com.example.plango.schedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api/users/{userId}")
 public class UserActivityController {
     private final ReviewService reviewService;
-    private final ScheduleService scheduleService;
+
 
     /**
      * 특정 사용자가 작성한 리뷰 목록 조회 API
@@ -37,11 +35,5 @@ public class UserActivityController {
 
         // 응답 생성
         return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(reviews));
-    }
-
-    @GetMapping("/schedules")
-    public ResponseEntity<SuccessResponse> readSchedules(@PathVariable String userId){
-        ScheduleThumbnailListDTO schedules=scheduleService.readByUserId(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(schedules));
     }
 }
