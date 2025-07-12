@@ -29,7 +29,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Flux<ServerSentEvent<String>> streamTourInfo(String keyword) {
-        String url = String.format("%s/tour?keyword=%s", urlManager.getPythonDomain(), keyword);
+        String url = String.format("%s/api/tour?keyword=%s", urlManager.getPythonDomain(), keyword);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -39,7 +39,7 @@ public class PlaceServiceImpl implements PlaceService {
             return webClient.get()
                     .uri(url)
                     .headers(h -> h.addAll(headers))
-                    .accept(MediaType.APPLICATION_NDJSON)
+                    .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .bodyToFlux(String.class)
                     .map(data -> ServerSentEvent.builder(data).build());

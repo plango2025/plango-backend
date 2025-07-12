@@ -47,7 +47,11 @@ public class UserInfoServiceImpl implements UserInfoService {
                 .orElseThrow(()-> new EntityNotFoundException("존재하지 않는 사용자입니다. (id = "+userId+")"));
 
         StorageFile profileImage=userInfo.getProfileImage();
-        String profileImageUrl=fileService.convertFilenameToUrl(profileImage.getFilename());
+        String profileImageUrl=null;
+        if(profileImage!=null){
+            profileImageUrl=fileService.convertFilenameToUrl(profileImage.getFilename());
+        }
+
 
         long reviewCount = reviewRepository.countByTargetTypeAndUser_Id(TargetType.SCHEDULE_REVIEW, userId);
         return UserInfoReadResponseDTO.builder()

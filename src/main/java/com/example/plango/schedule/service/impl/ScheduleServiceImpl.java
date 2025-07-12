@@ -18,6 +18,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -219,6 +220,36 @@ public class ScheduleServiceImpl implements ScheduleService {
                     .bodyValue(body)
                     .retrieve()
                     .bodyToMono(ScheduleReadResponseDTO.class)
+                    .block();
+
+        } catch (WebClientResponseException.Forbidden e) {
+            throw new AccessDeniedException("AI 서버 접근 권한이 없습니다.");
+        } catch (WebClientResponseException e) {
+            throw new AIScheduleGenerationException(ErrorCode.PYTHON_AI_ERROR, e.getResponseBodyAsString());
+        }
+    }
+
+    @Override
+    public ScheduleThumbnailListDTO readByUserId(String userId){
+        // URL 생성
+        String url = String.format("%s/api/schedules?user_id=%s", urlManager.getPythonDomain(), userId);
+
+        // 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("X-PLANGO-AI-ACCESS-KEY", plangoAIAccessKey);
+
+        // 요청 바디 구성
+        Map<String, Object> body = new HashMap<>();
+        body.put("user_id", userId);
+
+        try {
+            // PATCH 요청 전송 및 응답 수신
+            return webClient.get()
+                    .uri(url)
+                    .headers(h -> h.addAll(headers))
+                    .retrieve()
+                    .bodyToMono(ScheduleThumbnailListDTO.class)
                     .block();
 
         } catch (WebClientResponseException.Forbidden e) {
